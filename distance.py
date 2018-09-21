@@ -32,25 +32,43 @@ def compute_minimum_distance(points):
     
     """
     
-    result = None
-    for i in range(len(points)):
-        for j in range(len(points)):
-            if i == j:
+    """distances = []
+    for point1 in points:
+        for point2 in points:
+            if point1 == point2:
                 continue
-            distance = compute_distance(points[i],
-                                        points[j])
-            if result == None:
-                result = distance
-            elif distance < result:
-                result = distance
-    return result
+            distance = compute_distance(point1, point2)
+            distances.append(distance)
+    return min(distances)"""
+    
+    return min(compute_distance(point1, point2)
+               for point1 in points
+               for point2 in points
+               if point1 != point2)
     
 point1 = (0, 0)
 point2 = (1, 1)
 
+"""
 print(compute_distance(point1, point2))
 print(compute_distance(point1, point1))
 
 point3 = (1, 0)
 list_of_points = [point1, point2, point3]
 print(compute_minimum_distance(list_of_points))
+"""
+
+assert compute_distance(point1, point2) == math.sqrt(2)
+assert compute_distance(point1, point1) == 0
+
+point3 = (1, 0)
+list_of_points = [point1, point2, point3]
+assert compute_minimum_distance(list_of_points) == 1
+
+
+
+#to create forloop
+squares = []
+for n in range(10):
+    squares.append(n**2)
+print(squares)
